@@ -1,0 +1,27 @@
+name: Daily Green Graph
+
+on:
+  schedule:
+    # Runs at 00:00 UTC every day
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Update date file
+        run: |
+          echo "Commit for $(date)" >> activity_log.txt
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add activity_log.txt
+          git commit -m "Automated daily update: $(date)"
+          git push
