@@ -2,8 +2,7 @@ name: Daily Green Graph
 
 on:
   schedule:
-    # This cron code means: "Run at minute 0 past every 2nd hour."
-    # This equals 12 commits per day.
+    # Runs every 2 hours (12 commits per day)
     - cron: "0 */2 * * *"
   workflow_dispatch:
 
@@ -21,8 +20,10 @@ jobs:
 
       - name: Commit and Push
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          # Aapki details set kar di gayi hain:
+          git config --global user.name "Maheshkrsaw"
+          git config --global user.email "maheshkumar9304631853@gmail.com"
+          
           git add activity_log.txt
           git commit -m "Automated update: $(date)"
           git push
